@@ -8,6 +8,7 @@ export default {
         'typo-title': '#312E26',
         'typo-content': '#4A453A',
         'btn-pink': '#FDCAD3',
+        'btn-yellow': '#FEE500',
       },
     },
   },
