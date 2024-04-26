@@ -9,7 +9,8 @@ export default {
         'typo-content': '#4A453A',
         'btn-pink': '#FDCAD3',
         'btn-yellow': '#FEE500',
-        'btn-red': '#F79E89'
+        'btn-red': '#F79E89',
+        'icon-color': '#FB99AA',
       },
     },
   },
