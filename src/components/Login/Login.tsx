@@ -15,7 +15,7 @@ const Login = () => {
   return (
     <>
       <button onClick={loginHandler}>
-        <img src={kakaoLogin} width={330} />
+        <img src={kakaoLogin} className="w-full" />
       </button>
     </>
   )
