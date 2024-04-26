@@ -7,7 +7,9 @@ import { useState } from "react";
 
 export const Queue = () => {
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isWaiting, setIsWaiting] = useState(true);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [available, setAvailable] = useState(true);
   return (
     <div className="p-20">

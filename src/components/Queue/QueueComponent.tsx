@@ -1,7 +1,7 @@
 import React from 'react';
 
-export const Title = ({ title }: { title: string }) => {
-  return <div className="text-3xl font-extrabold">{title}</div>
+export const Title = ({ title, className = "" }: { title: string; className?: string; }) => {
+  return <div className={`text-3xl font-extrabold ${className}`}>{title}</div>
 }
 
 interface DescriptionProps extends React.PropsWithChildren {
