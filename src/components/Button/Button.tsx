@@ -1,6 +1,6 @@
 import React from 'react'
 
-type Color = 'pink' | 'kakao' | 'red'
+type Color = 'pink' | 'kakao' | 'toggle' | 'red'
 
 type ButtonProps = {
   onClick: () => void
@@ -23,9 +23,13 @@ const Button = ({ onClick, color, type = 'button', className, children }: Button
       combinedClassName = 'w-72 h-11 bg-btn-yellow rounded-lg font-bold cursor-pointer'
       break
     }
+    case 'toggle': {
+      combinedClassName = 'shadow-lg rounded-lg p-3 md:p-5 text-icon-color cursor-pointer'
+      break
+    }
     case 'red': {
       combinedClassName = "bg-btn-red rounded-lg font-bold cursor-pointer"
-      break
+      break;
     }
   }
   return (

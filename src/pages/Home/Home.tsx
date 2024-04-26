@@ -11,21 +11,21 @@ function Home() {
   // }
   return (
     <>
-      <div className="bg-primary-pink h-screen p-5 flex flex-col">
-        <img src={Heart1} width={190} />
+      <div className="bg-primary-pink p-5 h-full flex flex-col">
+        <img src={Heart1} className="w-5/12" />
 
-        <div className="flex justify-center py-2">
-          <img src={Logo} width={267} />
+        <div className="flex justify-center py-2 lg:py-8">
+          <img src={Logo} className="w-8/12 " />
         </div>
 
-        <div className="text-center pb-12  bg-[url('bg_container.svg')] bg-no-repeat bg-cover">
-          <div className="text-typo-content py-8 text-lg">
+        <div className="text-center py-4 md:py-8 min-h-[230px] md:min-h-[400px] bg-[url('bg_container.svg')] bg-no-repeat bg-contain">
+          <div className="text-typo-content text-xl md:text-4xl leading-relaxed md:leading-loose pb-10">
             간편한 웨이팅 등록으로 <br /> 편리하게 주점을 이용해보세요!
           </div>
           <Login />
         </div>
-        <div className="py-5">
-          <img src={Heart3} width={237} />
+        <div>
+          <img src={Heart3} className="w-7/12" />
         </div>
       </div>
     </>
