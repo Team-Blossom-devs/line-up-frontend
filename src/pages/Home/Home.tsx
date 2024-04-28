@@ -2,9 +2,9 @@ import Heart1 from '@/assets/images/heart1.svg'
 import Heart3 from '@/assets/images/heart3.svg'
 import Logo from '@/assets/images/Logo.svg'
 // import { useNavigate } from 'react-router-dom'
-import Login from '@/components/Login/Login'
+import { KakaoLogin } from '@/components/Login/KakaoLogin'
 
-function Home() {
+export const Home = () => {
   // const navigate = useNavigate()
   // const ClickButton = () => {
   //   navigate('/')
@@ -19,10 +19,11 @@ function Home() {
         </div>
 
         <div className="text-center py-4 md:py-8 min-h-[230px] md:min-h-[400px] bg-[url('bg_container.svg')] bg-no-repeat bg-contain">
-          <div className="text-typo-content text-xl md:text-4xl leading-relaxed md:leading-loose pb-10">
+          <div className="text-typo-content md:text-2xl leading-relaxed md:leading-loose pb-10">
             간편한 웨이팅 등록으로 <br /> 편리하게 주점을 이용해보세요!
           </div>
-          <Login />
+          <KakaoLogin />
+          {/* <div className="text-typo-content">LINE UP은 축제 종료 후 모든 개인정보를 폐기함을 알려드립니다.</div> */}
         </div>
         <div>
           <img src={Heart3} className="w-7/12" />
@@ -31,4 +32,3 @@ function Home() {
     </>
   )
 }
-export default Home

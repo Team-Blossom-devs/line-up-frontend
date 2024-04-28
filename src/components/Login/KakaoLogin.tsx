@@ -1,7 +1,7 @@
 import kakaoLogin from '@/assets/images/kakao_logo.svg'
 import { useNavigate } from 'react-router-dom'
 
-const Login = () => {
+export const KakaoLogin = () => {
   const navigate = useNavigate()
   //   const REST_API_KEY = ''
   //   const REDIRECT_URI = ''
@@ -14,10 +14,9 @@ const Login = () => {
 
   return (
     <>
-      <button onClick={loginHandler}>
-        <img src={kakaoLogin} className="w-full" />
+      <button onClick={loginHandler} className="w-full md:w-4/5">
+        <img src={kakaoLogin} />
       </button>
     </>
   )
 }
-export default Login
