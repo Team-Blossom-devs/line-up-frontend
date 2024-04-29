@@ -13,7 +13,7 @@ function Header() {
           </Button>
         </div>
         <div className="flex flex-1 justify-end">
-          <Button color="toggle" onClick={'#'}>
+          <Button color="toggle" onClick={() => {}}>
             <RxHamburgerMenu size={22} />
           </Button>
         </div>
