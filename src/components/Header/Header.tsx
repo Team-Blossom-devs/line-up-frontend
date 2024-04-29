@@ -8,7 +8,7 @@ function Header() {
     <>
       <div className="flex my-5 md:my-10 px-5 items-center">
         <div className="flex flex-1 justify-start">
-          <Button color="toggle" onClick={'#'}>
+          <Button color="toggle" onClick={() => window.history.back()}>
             <IoIosArrowBack size={22} />
           </Button>
         </div>
