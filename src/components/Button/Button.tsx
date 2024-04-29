@@ -16,7 +16,7 @@ const Button = ({ onClick, color, type = 'button', className, children }: Button
 
   switch (color) {
     case 'pink': {
-      combinedClassName = 'w-72 h-11 bg-btn-pink rounded-lg font-bold cursor-pointer'
+      combinedClassName = 'w-full p-2 md:p-3 bg-btn-pink rounded-lg font-bold cursor-pointer'
       break
     }
     case 'kakao': {
@@ -28,8 +28,8 @@ const Button = ({ onClick, color, type = 'button', className, children }: Button
       break
     }
     case 'red': {
-      combinedClassName = "bg-btn-red rounded-lg font-bold cursor-pointer"
-      break;
+      combinedClassName = 'bg-btn-red rounded-lg font-bold cursor-pointer'
+      break
     }
   }
   return (
