@@ -20,7 +20,7 @@ const Button = ({ onClick, color, type = 'button', className, children }: Button
       break
     }
     case 'kakao': {
-      combinedClassName = 'w-72 h-11 bg-btn-yellow rounded-lg font-bold cursor-pointer'
+      combinedClassName = 'w-full p-2 bg-btn-yellow rounded-lg font-bold cursor-pointer'
       break
     }
     case 'toggle': {

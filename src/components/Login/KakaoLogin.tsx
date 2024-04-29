@@ -14,7 +14,7 @@ export const KakaoLogin = () => {
 
   return (
     <>
-      <button onClick={loginHandler} className="w-full md:w-4/5">
+      <button onClick={loginHandler} className="px-2 mt-12">
         <img src={kakaoLogin} />
       </button>
     </>
