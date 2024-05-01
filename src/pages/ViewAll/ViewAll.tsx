@@ -7,16 +7,19 @@ function ViewAll() {
     name: string
     location: string
     time: string
+    table: string
   }
 
   const data: Bars[] = [
-    { name: '컴퓨터공학과 주점', location: '명진관', time: '18:00 ~ 22:00' },
-    { name: '신소재공학과 주점', location: '미래관', time: '19:00 ~ 22:00' },
-    { name: '화학공학과 주점', location: '명진관', time: '17:00 ~ 23:00' },
-    { name: '경영학과 주점', location: '미래관', time: '17:00 ~ 22:00' },
+    { name: '컴퓨터공학과 주점', location: '명진관', time: '18:00 ~ 22:00', table: '12' },
+    { name: '신소재공학과 주점', location: '미래관', time: '19:00 ~ 22:00', table: '12' },
+    { name: '화학공학과 주점', location: '명진관', time: '17:00 ~ 23:00', table: '12' },
+    { name: '경영학과 주점', location: '미래관', time: '17:00 ~ 22:00', table: '12' },
   ]
 
-  const barList = data.map((value) => <Bar name={value.name} location={value.location} time={value.time} />)
+  const barList = data.map((value) => (
+    <Bar name={value.name} location={value.location} time={value.time} table={value.table} />
+  ))
 
   return (
     <>

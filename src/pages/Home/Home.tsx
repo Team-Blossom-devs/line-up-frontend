@@ -3,7 +3,7 @@ import Heart3 from '@/assets/images/heart3.svg'
 import Logo from '@/assets/images/Logo.svg'
 import Heart2 from '@/assets/images/bg_container.svg'
 // import { useNavigate } from 'react-router-dom'
-import { KakaoLogin } from '@/components/Login/KakaoLogin'
+import { KakaoLogin } from '@/components/Login/LoginForm'
 
 export const Home = () => {
   // const navigate = useNavigate()
