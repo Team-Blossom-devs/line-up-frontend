@@ -1,14 +1,16 @@
 import { MdPlace } from 'react-icons/md'
 import { FaRegClock } from 'react-icons/fa'
+import { MdSportsBar } from 'react-icons/md'
 import Container from '@/assets/images/wna.jpeg'
 
 interface propsType {
   name: string
   location: string
   time: string
+  table: string
 }
 
-function Bar({ name, location, time }: propsType) {
+function Bar({ name, location, time, table }: propsType) {
   return (
     <>
       <div className="flex flex-col w-full">
@@ -22,6 +24,9 @@ function Bar({ name, location, time }: propsType) {
           <div className="flex flex-row gap-2">
             <FaRegClock size={20} />
             {time}
+          </div>
+          <div className="flex flex-row gap-2">
+            <MdSportsBar size={20} />/ {table} 테이블
           </div>
         </div>
       </div>
