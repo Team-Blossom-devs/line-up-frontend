@@ -3,7 +3,7 @@ import Heart3 from '@/assets/images/heart3.svg'
 import Logo from '@/assets/images/Logo.svg'
 import Heart2 from '@/assets/images/bg_container.svg'
 // import { useNavigate } from 'react-router-dom'
-import { KakaoLogin } from '@/components/Login/KakaoLogin'
+import { KakaoLogin } from '@/components/Login/LoginForm'
 
 export const Home = () => {
   // const navigate = useNavigate()
@@ -20,7 +20,7 @@ export const Home = () => {
 
           <img src={Heart2} className="mt-8 absolute z-0" />
 
-          <div className="z-20 text-typo-content my-8 text-2xl">
+          <div className="z-20 text-typo-content my-8 md:text-2xl">
             간편한 웨이팅 등록으로 <br /> 편리하게 주점을 이용해보세요!
             <KakaoLogin />
           </div>
