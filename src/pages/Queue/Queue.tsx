@@ -10,43 +10,42 @@ export const Queue = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isWaiting, setIsWaiting] = useState(true);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [available, setAvailable] = useState(true);
+  const [available, setAvailable] = useState(false);
   return (
-    <div className="p-20">
+    <div className="flex flex-col items-center">
       <Logo />
-      <div>
-        <Title title="title" />
-        <Block className="flex items-start my-5 justify-center">
-          {
-            isWaiting && available ?
-              <img src={qr} className="h-96" />
-              :
-              <>
-                <img src={menu} className="mr-10 h-96" />
-                <Block>
-                  test123
-                </Block>
-              </>
-          }
-        </Block>
+      <Title title="title" className="text-left" />
+      <Block className="flex items-start my-5 justify-center">
         {
-          isWaiting ?
-            <Block className="px-32">
-              <Description description="대기팀 6팀" />
-              <Description description={`입장까지 1시간 40분 남았습니다. ${available ? "서둘러 입장해주세요!" : ""}`} />
-              <Description description="대기인원 6명" />
-              <div className="flex justify-end px-10">
-                <Button onClick={() => { }} color="red" className="text-white text-sm px-3 py-1">대기 취소</Button>
-              </div>
-            </Block>
+          isWaiting && available ?
+            <img src={qr} className="max-h-96" />
             :
-            <Block>
-              <Description description="대기팀 6팀" />
-              <Description description="입장까지 1시간 40분 남았습니다" />
-              <input type="number" className="border-2 border-gray-400 rounded-xl mb-5 w-16 mr-2" />명
-              <Button onClick={() => { }} color="pink" className="w-full text-white font-bold">줄서기</Button>
-            </Block>}
-      </div>
+            <>
+              <img src={menu} className="max-w-48 mr-3" />
+              <Block>
+                test123
+              </Block>
+            </>
+        }
+      </Block>
+      {
+        isWaiting ?
+          <Block className="">
+            <Description description="대기 팀 6팀" />
+            <Description description={`입장까지 1시간 40분 남았습니다.`} />
+            {available && <Description description="서둘러 입장해주세요!" />}
+            <Description description="대기 인원 6명" />
+            <div className="flex justify-end">
+              <Button onClick={() => { }} color="red" className="text-white text-sm px-3 py-1">대기 취소</Button>
+            </div>
+          </Block>
+          :
+          <Block>
+            <Description description="대기팀 6팀" />
+            <Description description="입장까지 1시간 40분 남았습니다" />
+            <input type="number" className="border-2 border-gray-400 rounded-xl mb-5 w-16 mr-2" />명
+            <Button onClick={() => { }} color="pink" className="w-full text-white font-bold">줄서기</Button>
+          </Block>}
     </div>
   )
 }
