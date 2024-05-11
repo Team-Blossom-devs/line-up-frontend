@@ -5,11 +5,10 @@ interface GetWaitingReturnType {
   time: number
   currentWaitingNumber?: number,
   headCount?: number,
-  waitingId?: number,
   qrUrl?: string
 }
 
-export const getWaiting = async (id: number) => {
+export const getWaiting = async (id: string) => {
   const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_ADDRESS}/api/waiting/${id}`);
   const returnValue: GetWaitingReturnType = {
     waitingStatus: "PENDING",
@@ -28,7 +27,6 @@ export const getWaiting = async (id: number) => {
   // QR요청 보내서 따로 받아와야함
   else if (response && response.data.data.waitingStatus == "PENDING") {
     const qrResponse = await axios.get(`${import.meta.env.VITE_APP_BACKEND_ADDRESS}/api/waiting/qr/${id}`);
-    returnValue.waitingId = response.data.data.waitingId;
     returnValue.waitingStatus = "PENDING";
     returnValue.time = response.data.data.remainMinutes;
     returnValue.qrUrl = qrResponse.data;
