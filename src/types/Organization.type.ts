@@ -3,4 +3,5 @@ export interface Organization {
   seatCount: number;
   name: string;
   introduce: string;
+  imgUrl: string;
 }

@@ -32,7 +32,7 @@ const NotWaiting = ({ id, imgUrl, description, currentWaitingNumber, time, onNex
           type="number"
           value={headCount}
           onChange={(e) => setHeadCount(parseInt(e.target.value))}
-          className="border-2 border-gray-400 rounded-xl mb-5 w-16 mr-2"
+          className="border-2 border-gray-400 rounded-xl mb-5 w-16 mr-2 text-center"
         />명
         <Button onClick={() => {
           postWaiting(id, headCount)

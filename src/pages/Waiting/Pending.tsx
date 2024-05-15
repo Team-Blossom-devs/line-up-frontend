@@ -16,7 +16,7 @@ const Pending = ({ id, imgUrl, time }: PendingProps) => {
         <img src={imgUrl} className="max-h-96" />
       </Block>
       <Block className="">
-        <Description description={`${time % 60}분 안에 입장완료해주세요.`} />
+        <Description description={`${time}분 안에 입장완료해주세요.`} />
         <div className="flex justify-end">
           <Button onClick={() => { deleteWaiting(id) }} color="red" className="text-white text-sm px-3 py-1">대기 취소</Button>
         </div>

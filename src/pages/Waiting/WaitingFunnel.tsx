@@ -1,12 +1,14 @@
 import { Logo } from "@/components/Logo/Logo"
 import { Title } from "@/components/Waiting/WaitingComponent"
 import { useEffect, useState } from "react";
-// import { getWaiting } from "@/api/line/getWaiting";
-// import { getOrganDetail } from "@/api/organization/getOrganDetail";
+import { getWaiting } from "@/api/line/getWaiting";
+import { getOrganDetail } from "@/api/organization/getOrganDetail";
 import NotWaiting from "./NotWaiting";
 import Waiting from "./Waiting";
 import Pending from "./Pending";
 import { useNavigate, useParams } from "react-router-dom";
+import { WaitingType } from "@/types/Waiting.type";
+import { Organization } from "@/types/Organization.type";
 
 export const WaitingFunnel = () => {
 
@@ -14,12 +16,18 @@ export const WaitingFunnel = () => {
   const id = useParams().id;
   const navigate = useNavigate();
 
+  const [waitingInfo, setWaitingInfo] = useState<WaitingType>();
+  const [organization, setOrganization] = useState<Organization>()
+
   useEffect(() => {
 
     const get = async () => {
       if (id) {
-        // const waitingInfo = await getWaiting(id);
-        // const organInfo = await getOrganDetail(id);
+        const waitingInfo = await getWaiting(id);
+        setWaitingInfo(waitingInfo);
+        setStep(waitingInfo.waitingStatus);
+        const organInfo = await getOrganDetail(id);
+        setOrganization(organInfo);
       } else {
         navigate('/waitings')
       }
@@ -27,36 +35,46 @@ export const WaitingFunnel = () => {
     get();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
+  }, [id, step])
 
-  return (
-    <div className="flex flex-col items-center">
-      <Logo />
-      <Title title="title" className="text-left" />
-      <>
-        {step == "NOT-WAITING" && <NotWaiting
-          id={"1"}
-          imgUrl=""
-          description=""
-          currentWaitingNumber={0}
-          time={600}
-          onNext={() => { setStep("WAITING") }}
-        />}
-        {step == "WAITING" && <Waiting
-          id={"1"}
-          imgUrl=""
-          description=""
-          currentWaitingNumber={0}
-          time={600}
-          headCount={6}
-          onCancel={() => { setStep("NOT-WAITING") }}
-        />}
-        {step == "PENDING" && <Pending
-          id={"1"}
-          imgUrl=""
-          time={600}
-        />}
-      </>
-    </div>
-  )
+
+  if (!id || !waitingInfo || !organization) {
+    return (
+      <div>
+        Loading...
+      </div>
+    )
+  }
+  else {
+    return (
+      <div className="flex flex-col items-center">
+        <Logo />
+        <Title title="title" className="text-left" />
+        <>
+          {id && step == "NOT-WAITING" && <NotWaiting
+            id={id}
+            imgUrl={organization.imgUrl}
+            description={organization.introduce}
+            currentWaitingNumber={waitingInfo.currentWaitingNumber!}
+            time={waitingInfo.time}
+            onNext={() => { setStep("WAITING") }}
+          />}
+          {step == "WAITING" && <Waiting
+            id={id}
+            imgUrl={organization.imgUrl}
+            description={organization.introduce}
+            currentWaitingNumber={waitingInfo.currentWaitingNumber!}
+            time={waitingInfo.time}
+            headCount={waitingInfo.headCount!}
+            onCancel={() => { setStep("NOT-WAITING") }}
+          />}
+          {step == "PENDING" && <Pending
+            id={id}
+            imgUrl={organization.imgUrl}
+            time={waitingInfo.time}
+          />}
+        </>
+      </div>
+    )
+  }
 }
