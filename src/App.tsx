@@ -4,7 +4,7 @@ import '@/styles/index.css'
 
 const Layout = ({ children }: React.PropsWithChildren) => {
   return (
-    <div className="flex justify-center min-h-screen bg-white">
+    <div className="flex justify-center min-h-screen bg-white ">
       <div className="w-full max-w-2xl">{children}</div>
     </div>
   )

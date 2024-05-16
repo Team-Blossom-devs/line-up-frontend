@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.container {
+  @apply px-5 flex flex-col text-center h-full;
+}
+
+.label {
+  @apply text-typo-content flex justify-center items-center;
+}
+
+.form {
+  @apply w-full my-10 flex flex-col gap-8 px-3;
+}

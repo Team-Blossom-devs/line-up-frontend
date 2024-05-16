@@ -1,21 +1,19 @@
-import { IoIosArrowBack } from 'react-icons/io'
-import Logo from '@/assets/images/Logo.svg'
-import { RxHamburgerMenu } from 'react-icons/rx'
-import Button from '@/components/Button/Button'
-import { HamburgerModal } from '@/components/Modal/HamburgerModal'
 import { useState } from 'react'
+import { IoIosArrowBack } from 'react-icons/io'
+import { RxHamburgerMenu } from 'react-icons/rx'
+import { Logo } from '@/components/Logo/Logo'
+import { Button } from '@/components/Button/Button'
+import { HamburgerModal } from '@/components/Modal/HamburgerModal'
 
-function Header() {
+export const Header = () => {
   const [openModal, setOpenModal] = useState(false)
 
   return (
     <>
       <div className="flex my-5 md:my-10 px-5 items-center">
-        <div className="flex flex-1 justify-start">
-          <Button color="toggle" onClick={() => window.history.back()}>
-            <IoIosArrowBack size={22} />
-          </Button>
-        </div>
+        <Button color="toggle" onClick={() => window.history.back()}>
+          <IoIosArrowBack size={22} />
+        </Button>
         <div className="flex flex-1 justify-end">
           <Button
             color="toggle"
@@ -27,11 +25,10 @@ function Header() {
           </Button>
         </div>
       </div>
-      <div className="flex items-center justify-center w-full px-10 my-7">
-        <img src={Logo} className="w-1/2" />
+      <div className="flex justify-center px-10 md:px-20 my-5">
+        <Logo />
       </div>
       {openModal && <HamburgerModal onClose={() => setOpenModal(false)} />}
     </>
   )
 }
-export default Header

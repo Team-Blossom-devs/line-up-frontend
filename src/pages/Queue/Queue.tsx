@@ -1,14 +1,13 @@
-import { Logo } from "@/components/Logo/Logo"
-import qr from "@/assets/images/qr.jpg"
-import menu from "@/assets/images/주점_메뉴.jpg";
-import { Title, Block, Description } from "@/components/Queue/QueueComponent"
-import Button from "@/components/Button/Button";
-import { useState } from "react";
+import { Logo } from '@/components/Logo/Logo'
+import qr from '@/assets/images/qr.jpg'
+import menu from '@/assets/images/주점_메뉴.jpg'
+import { Title, Block, Description } from '@/components/Queue/QueueComponent'
+import { Button } from '@/components/Button/Button'
+import { useState } from 'react'
 
 export const Queue = () => {
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isWaiting, setIsWaiting] = useState(true);
+  const [isWaiting, setIsWaiting] = useState(true)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [available, setAvailable] = useState(false);
   return (
