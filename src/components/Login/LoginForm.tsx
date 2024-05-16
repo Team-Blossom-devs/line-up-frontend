@@ -1,51 +1,72 @@
-import { InputHTMLAttributes } from 'react'
-import kakaoLogin from '@/assets/images/kakao_logo.svg'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
-
-export const Input = ({ className = '', ...props }: InputProps) => {
-  return (
-    <input
-      className={`border-solid border p-2 md:p-3 rounded-md placeholder:text-input-text placeholder:text-sm ${className}`}
-      {...props}
-    />
-  )
-}
+import { Input } from '@/components/Input/Input'
+import { Button } from '@/components/Button/Button'
+import { postSignIn } from '@/api/login/postSignIn'
+import kakaoLogin from '@/assets/images/kakao_logo.svg'
 
 export const KakaoLogin = () => {
-  const navigate = useNavigate()
-  //   const REST_API_KEY = ''
-  //   const REDIRECT_URI = ''
-  //   const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
+  const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY
+  const REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI
+  const KAKAO_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
 
   const loginHandler = () => {
-    // window.location.href = link
-    navigate('/viewAll')
+    window.location.href = KAKAO_URL
   }
 
   return (
     <>
-      <button onClick={loginHandler} className="px-2 mt-12">
-        <img src={kakaoLogin} />
-      </button>
+      <div className="z-20 text-typo-content my-8 md:text-2xl">
+        간편한 웨이팅 등록으로 <br /> 편리하게 주점을 이용해보세요!
+        <Button onClick={loginHandler} color="kakao" icon={kakaoLogin} children="" />
+      </div>
     </>
   )
 }
 
 export const LoginForm = () => {
+  const navigate = useNavigate()
+  const [managerName, setManagerName] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    try {
+      const response = await postSignIn(managerName, password)
+      console.log(response)
+      window.alert('로그인이 완료되었습니다.')
+      navigate('/admin')
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <>
-      <div className="w-4/5 md:w-full flex flex-col gap-6 my-5">
-        <label htmlFor="id" className="flex flex-col gap-1 text-typo-content">
-          아이디
-          <Input type="text" name="id" placeholder="아이디를 입력해주세요" />
+      <form onSubmit={handleSubmit} className="form">
+        <label htmlFor="id" className="label">
+          <div className="w-24 text-left">아이디</div>
+          <Input
+            type="text"
+            name="managerName"
+            value={managerName}
+            onChange={(e) => setManagerName(e.target.value)}
+            placeholder="아이디를 입력해주세요"
+          />
         </label>
-        <label htmlFor="password" className="flex flex-col gap-1 text-typo-content">
-          비밀번호
-          <Input type="password" name="password" placeholder="비밀번호를 입력해주세요" />
+        <label htmlFor="password" className="label">
+          <div className="w-24 text-left">비밀번호</div>
+          <Input
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="비밀번호를 입력해주세요"
+          />
         </label>
-      </div>
+        <Button color="pink" type="submit" children="로그인" />
+      </form>
     </>
   )
 }
