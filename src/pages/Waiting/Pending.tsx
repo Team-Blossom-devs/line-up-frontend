@@ -1,6 +1,6 @@
 
 import { deleteWaiting } from "@/api/line/deleteWaiting";
-import Button from "@/components/Button/Button"
+import { Button } from "@/components/Button/Button"
 import { Block, Description } from "@/components/Waiting/WaitingComponent"
 
 interface PendingProps {
