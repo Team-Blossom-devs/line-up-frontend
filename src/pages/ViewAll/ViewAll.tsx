@@ -1,43 +1,88 @@
-import Header from '@/components/Header/Header'
+import { useState, useEffect } from 'react'
+import { Header } from '@/components/Header/Header'
+import { Bar } from '@/components/Bar/Bar'
+import { getSearch } from '@/api/search/getSearch'
 import { CiSearch } from 'react-icons/ci'
-import Bar from '@/components/Bar/Bar'
 
-function ViewAll() {
-  type Bars = {
-    name: string
-    location: string
-    time: string
-    table: string
+interface Organization {
+  id: number
+  name: string
+  location: string
+  tableCount: number
+}
+
+export const ViewAll = () => {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [pageNum, setPageNum] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [organizations, setOrganizations] = useState<Organization[]>([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getSearch(searchTerm, pageNum)
+        const searchOrganizations = response.data.organizationDtoList.filter((org: Organization) =>
+          org.name.includes(searchTerm)
+        )
+        setOrganizations(searchOrganizations)
+        setTotalPages(response.data.totalPages)
+        console.log(searchOrganizations)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    fetchData()
+  }, [searchTerm, pageNum])
+
+  const handleClick = (page: number) => {
+    setPageNum(page)
   }
 
-  const data: Bars[] = [
-    { name: '컴퓨터공학과 주점', location: '명진관', time: '18:00 ~ 22:00', table: '12' },
-    { name: '신소재공학과 주점', location: '미래관', time: '19:00 ~ 22:00', table: '12' },
-    { name: '화학공학과 주점', location: '명진관', time: '17:00 ~ 23:00', table: '12' },
-    { name: '경영학과 주점', location: '미래관', time: '17:00 ~ 22:00', table: '12' },
-  ]
-
-  const barList = data.map((value) => (
-    <Bar name={value.name} location={value.location} time={value.time} table={value.table} />
-  ))
+  const pagination = () => {
+    const pages = []
+    for (let i = 1; i <= totalPages; i++) {
+      pages.push(
+        <button
+          key={i}
+          onClick={() => handleClick(i)}
+          className={`mx-1 px-3 py-1 ${pageNum === i ? 'bg-icon-color text-white rounded-lg' : 'text-icon-color'}`}
+        >
+          {i}
+        </button>
+      )
+    }
+    return pages
+  }
 
   return (
     <>
       <Header />
-      <div className="px-5 md:px-0">
-        <div className="flex my-5 border-gray-100 rounded-md border-solid border-2  text-gray-400 px-3 py-1 md:py-2 gap-2">
+      <div className="container">
+        <div className="my-2 flex border-gray-100 rounded-md border-2  text-gray-400 px-3 py-1 md:py-2 gap-2">
           <CiSearch size={22} />
-          <input type="text" className="focus:outline-none" placeholder="주점을 검색해주세요" />
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="focus:outline-none"
+            placeholder="주점을 검색해주세요"
+          />
         </div>
-        <div className="flex flex-col justify-center items-center">
-          <div className="mt-5 mb-8 text-icon-color text-lg font-bold">주점 전체보기</div>
+        <div className="my-8 text-icon-color text-lg font-bold">주점 전체보기</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 cursor-pointer text-left">
+          {organizations.map((org) => (
+            <Bar
+              key={org.id}
+              name={org.name}
+              location={org.location}
+              time="시간 정보 없음"
+              table={org.tableCount.toString()}
+            />
+          ))}
         </div>
 
-        {/* <div className="flex"> */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 cursor-pointer">{barList}</div>
-        {/* </div> */}
+        <div className="flex justify-center my-10">{pagination()}</div>
       </div>
     </>
   )
 }
-export default ViewAll

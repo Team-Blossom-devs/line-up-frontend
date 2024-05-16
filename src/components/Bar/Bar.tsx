@@ -10,7 +10,7 @@ interface propsType {
   table: string
 }
 
-function Bar({ name, location, time, table }: propsType) {
+export const Bar = ({ name, location, time, table }: propsType) => {
   return (
     <>
       <div className="flex flex-col w-full">
@@ -33,4 +33,3 @@ function Bar({ name, location, time, table }: propsType) {
     </>
   )
 }
-export default Bar
