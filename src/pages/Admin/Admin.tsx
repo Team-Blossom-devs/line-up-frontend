@@ -1,6 +1,6 @@
 import { Row } from "@/components/AdminRow/Row"
 import { Logo } from "@/components/Logo/Logo"
-import { Title } from "@/components/Queue/QueueComponent"
+import { Title } from "@/components/Waiting/WaitingComponent"
 
 export const Admin = () => {
   return (
