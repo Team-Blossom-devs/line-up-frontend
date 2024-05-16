@@ -11,7 +11,7 @@ interface RowProps {
 
 export const Row = ({ id, name, count, phone, time, status }: RowProps) => {
   return (
-    <tr className="text-xl border-y-2">
+    <tr className="text-sm whitespace-nowrap w-full border-y-2">
       <td className="py-8">{name}</td>
       <td>{count}</td>
       <td>{phone}</td>
