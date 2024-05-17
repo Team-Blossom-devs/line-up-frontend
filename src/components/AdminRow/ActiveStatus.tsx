@@ -1,4 +1,4 @@
-export type Status = "enter" | "ready" | "ing"
+export type Status = "PENDING" | "WAITING" | "COMPLETE"
 
 interface ActiveStatusProps {
   status: Status;
@@ -6,9 +6,9 @@ interface ActiveStatusProps {
 }
 
 const statusButton = {
-  enter: "입장완료",
-  ready: "입장처리",
-  ing: "입장중"
+  COMPLETE: "입장완료",
+  WAITING: "대기중",
+  PENDING: "입장중"
 }
 
 export const ActiveStatus = ({ status, className = "" }: ActiveStatusProps) => {
@@ -16,16 +16,16 @@ export const ActiveStatus = ({ status, className = "" }: ActiveStatusProps) => {
   let combinedClassName = "text-white font-bold px-3 py-1 rounded-xl";
 
   switch (status) {
-    case "enter": {
+    case "COMPLETE": {
       console.log(status);
       combinedClassName += " bg-[#32936F]";
       break;
     }
-    case "ready": { //입장처리
+    case "WAITING": { //입장처리
       combinedClassName += " bg-[#F57E77]";
       break;
     }
-    case "ing": {
+    case "PENDING": {
       combinedClassName += " bg-[#FFD700]";
       break;
     }

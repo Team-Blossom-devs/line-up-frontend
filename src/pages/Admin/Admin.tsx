@@ -1,8 +1,28 @@
+import { getWaitingList } from "@/api/manager/getWaitingList"
 import { Row } from "@/components/AdminRow/Row"
 import { Logo } from "@/components/Logo/Logo"
 import { Title } from "@/components/Waiting/WaitingComponent"
+import { TableType } from "@/types/Table.type"
+import { useEffect, useRef, useState } from "react"
 
 export const Admin = () => {
+
+  const cursor = useRef<string>("");
+
+  const [waitingList, setWaitingList] = useState<TableType[]>([]);
+
+  useEffect(() => {
+    const get = async () => {
+      const response = await getWaitingList(2, cursor.current);
+      cursor.current = response.data.cursorId;
+      console.log(response.data.waitingDetails);
+      setWaitingList([...waitingList, ...response.data.waitingDetails])
+    }
+    get();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <div className="flex flex-col items-center">
       <Logo />
@@ -20,12 +40,19 @@ export const Admin = () => {
             <td className="w-3/10 whitespace-nowrap">전화번호</td>
             <td className="w-3/10 whitespace-nowrap">이용 시간</td>
             <td className="w-1/10 whitespace-nowrap">입장 상태</td>
+            <td className="w-1/10 whitespace-nowrap">삭제</td>
           </tr>
         </thead>
         <tbody>
-          <Row id="1" name="userName" count={10} time="1시간 20분" phone="010-1234-5678" status="enter" />
-          <Row id="1" name="userName" count={10} time="1시간 20분" phone="010-1234-5678" status="ready" />
-          <Row id="1" name="userName" count={10} time="1시간 20분" phone="010-1234-5678" status="ing" />
+          {waitingList.map((it) => (
+            <Row
+              key={it.id}
+              name={it.name}
+              count={it.headCount}
+              phone={it.phoneNumber}
+              time={it.entranceTime}
+              status={it.entranceStatus} />
+          ))}
         </tbody>
       </table>
     </div>
