@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Header } from '@/components/Header/Header'
 import { Bar } from '@/components/Bar/Bar'
 import { getSearch } from '@/api/search/getSearch'
@@ -9,9 +10,13 @@ interface Organization {
   name: string
   location: string
   tableCount: number
+  openTime: string
+  closeTime: string
 }
 
 export const ViewAll = () => {
+  const navigate = useNavigate()
+
   const [searchTerm, setSearchTerm] = useState('')
   const [pageNum, setPageNum] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
@@ -26,7 +31,6 @@ export const ViewAll = () => {
         )
         setOrganizations(searchOrganizations)
         setTotalPages(response.data.totalPages)
-        console.log(searchOrganizations)
       } catch (err) {
         console.log(err)
       }
@@ -34,8 +38,8 @@ export const ViewAll = () => {
     fetchData()
   }, [searchTerm, pageNum])
 
-  const handleClick = (page: number) => {
-    setPageNum(page)
+  const handleClick = (id: number) => {
+    navigate(`/waiting/${id}`)
   }
 
   const pagination = () => {
@@ -44,7 +48,7 @@ export const ViewAll = () => {
       pages.push(
         <button
           key={i}
-          onClick={() => handleClick(i)}
+          onClick={() => setPageNum(i)}
           className={`mx-1 px-3 py-1 ${pageNum === i ? 'bg-icon-color text-white rounded-lg' : 'text-icon-color'}`}
         >
           {i}
@@ -75,8 +79,9 @@ export const ViewAll = () => {
               key={org.id}
               name={org.name}
               location={org.location}
-              time="시간 정보 없음"
+              time={`${org.openTime} - ${org.closeTime}`}
               table={org.tableCount.toString()}
+              onClick={() => handleClick(org.id)}
             />
           ))}
         </div>
