@@ -6,13 +6,14 @@ import AdminLogin from './pages/Admin/Login'
 import { WaitingFunnel } from "./pages/Waiting/WaitingFunnel"
 import { Auth } from './pages/Home/Auth'
 import { Signup } from './pages/Home/Signup'
+import WaitingList from "./pages/Waiting/WaitingList"
 
 export default function Router() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/waitings" element={<WaitingFunnel />} />
+        <Route path="/waitings" element={<WaitingList />} />
         <Route path="/waiting/:id" element={<WaitingFunnel />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/viewAll" element={<ViewAll />} />

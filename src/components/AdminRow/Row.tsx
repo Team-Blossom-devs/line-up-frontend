@@ -16,7 +16,7 @@ export const Row = ({ id, name, count, phone, time, status, handleRestoration, h
     <tr className="text-sm whitespace-nowrap w-full border-y-2">
       <td className="py-8">
         <p>{name}</p>
-        <p>{count}</p>
+        <p>{count}명</p>
       </td>
       <td>{phone}</td>
       <td>{time ? (new Date(time).toLocaleTimeString()) : ""}</td>
