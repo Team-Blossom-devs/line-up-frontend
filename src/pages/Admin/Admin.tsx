@@ -48,7 +48,7 @@ export const Admin = () => {
           <tr className="text-sm">
             <td className="w-2/10 py-5 whitespace-nowrap">이름</td>
             <td className="w-3/10 whitespace-nowrap">전화번호</td>
-            <td className="w-3/10 whitespace-nowrap">입장 시간</td>
+            <td className="w-3/10 whitespace-nowrap">이용 시간</td>
             <td className="w-1/10 whitespace-nowrap">입장 상태</td>
             <td className="w-1/10 whitespace-nowrap">삭제</td>
           </tr>
