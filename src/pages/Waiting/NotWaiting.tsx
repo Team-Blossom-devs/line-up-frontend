@@ -19,11 +19,9 @@ const NotWaiting = ({ id, imgUrl, description, currentWaitingNumber, time, onNex
 
   return (
     <>
-      <Block className="flex items-start my-5 justify-center">
-        <img src={imgUrl} className="max-w-48 mr-3" />
-        <Block>
-          {description}
-        </Block>
+      <Block className="flex flex-col my-5 justify-center">
+        <div className="flex justify-center w-full"><img src={imgUrl} className="max-w-48 mr-3" /></div>
+        <p className="mx-5">{description}</p>
       </Block>
       <Block>
         <Description description={`대기팀 ${currentWaitingNumber}팀`} />

@@ -17,13 +17,11 @@ interface WaitingProps {
 const Waiting = ({ id, imgUrl, description, currentWaitingNumber, time, headCount, onCancel }: WaitingProps) => {
   return (
     <>
-      <Block className="flex items-start my-5 justify-center">
-        <img src={imgUrl} className="max-w-48 mr-3" />
-        <Block>
-          {description}
-        </Block>
+      <Block className="flex flex-col my-5 justify-center">
+        <div className="flex justify-center w-full"><img src={imgUrl} className="max-w-48 mr-3" /></div>
+        <p className="mx-5">{description}</p>
       </Block>
-      <Block className="">
+      <Block>
         <Description description={`대기팀 ${currentWaitingNumber}팀`} />
         <Description description={`입장까지 약 ${Math.floor(time / 60)}시간 ${time % 60}분 남았습니다.`} />
         <Description description={`대기 인원 ${headCount}명`} />

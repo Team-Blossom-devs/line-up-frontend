@@ -10,6 +10,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { WaitingType } from "@/types/Waiting.type";
 import { Organization } from "@/types/Organization.type";
 
+import dummyImg from "../../assets/images/주점_메뉴.jpg";
+
+
 export const WaitingFunnel = () => {
 
   const [step, setStep] = useState<"PENDING" | "WAITING" | "NOT-WAITING">("NOT-WAITING");
@@ -27,7 +30,7 @@ export const WaitingFunnel = () => {
         setWaitingInfo(waitingInfo);
         setStep(waitingInfo.waitingStatus);
         const organInfo = await getOrganDetail(id);
-        setOrganization(organInfo);
+        setOrganization(organInfo.data);
       } else {
         navigate('/waitings')
       }
@@ -49,20 +52,22 @@ export const WaitingFunnel = () => {
     return (
       <div className="flex flex-col items-center">
         <Logo />
-        <Title title="title" className="text-left" />
+        <Title title={organization.name} className="text-left" />
         <>
           {id && step == "NOT-WAITING" && <NotWaiting
             id={id}
-            imgUrl={organization.imgUrl}
-            description={organization.introduce}
+            imgUrl={dummyImg}
+            // imgUrl={organization.imgUrl}
+            description={organization.introduce!}
             currentWaitingNumber={waitingInfo.currentWaitingNumber!}
             time={waitingInfo.time}
             onNext={() => { setStep("WAITING") }}
           />}
           {step == "WAITING" && <Waiting
             id={id}
-            imgUrl={organization.imgUrl}
-            description={organization.introduce}
+            imgUrl={dummyImg}
+            // imgUrl={organization.imgUrl}
+            description={organization.introduce!}
             currentWaitingNumber={waitingInfo.currentWaitingNumber!}
             time={waitingInfo.time}
             headCount={waitingInfo.headCount!}
@@ -70,7 +75,8 @@ export const WaitingFunnel = () => {
           />}
           {step == "PENDING" && <Pending
             id={id}
-            imgUrl={organization.imgUrl}
+            imgUrl={dummyImg}
+            // imgUrl={organization.imgUrl}
             time={waitingInfo.time}
           />}
         </>

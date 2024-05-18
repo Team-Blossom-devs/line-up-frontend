@@ -1,7 +1,8 @@
 export interface Organization {
   id: string;
-  seatCount: number;
+  tableCount: number;
   name: string;
   introduce: string;
   imgUrl: string;
+  location: string;
 }
