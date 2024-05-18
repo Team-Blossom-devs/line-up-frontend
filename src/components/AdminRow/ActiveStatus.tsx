@@ -17,7 +17,6 @@ export const ActiveStatus = ({ status, className = "" }: ActiveStatusProps) => {
 
   switch (status) {
     case "COMPLETE": {
-      console.log(status);
       combinedClassName += " bg-[#32936F]";
       break;
     }
