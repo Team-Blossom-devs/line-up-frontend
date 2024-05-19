@@ -1,8 +1,6 @@
 import axios from 'axios'
 
 export const postSignUp = async (userName: string, phoneNumber: string) => {
-  const accessToken = localStorage.getItem('token')
-
   const response = await axios.post(
     `${import.meta.env.VITE_APP_BACKEND_ADDRESS}/api/oauth/sign-up`,
     {
@@ -11,7 +9,7 @@ export const postSignUp = async (userName: string, phoneNumber: string) => {
     },
     {
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `${localStorage.getItem('token')}`,
       },
       withCredentials: true,
     }

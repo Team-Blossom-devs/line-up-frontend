@@ -18,7 +18,7 @@ export const Signup = () => {
       localStorage.setItem('token', token)
       console.log(token)
     }
-  }, [navigate])
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
