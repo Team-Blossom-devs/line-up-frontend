@@ -33,11 +33,15 @@ export const LoginForm = () => {
     e.preventDefault()
 
     try {
-      const response = await postSignIn(managerName, password)
-      console.log(response)
-      //토큰 저장 로직 추가해야됨
-      window.alert('로그인이 완료되었습니다.')
-      navigate('/admin')
+      const token = await postSignIn(managerName, password)
+
+      if (token) {
+        localStorage.setItem('token', token)
+        window.alert('로그인이 완료되었습니다.')
+        navigate('/admin')
+      } else {
+        console.error('로그인에 실패하셨습니다.')
+      }
     } catch (err) {
       console.log(err)
     }
