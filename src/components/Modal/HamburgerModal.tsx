@@ -1,16 +1,24 @@
 import React from 'react'
+import { putLogout } from '@/api/login/putLogout'
+import { Button } from '../Button/Button'
 
 type Props = {
   onClose: () => void
 }
 
 export const HamburgerModal = ({ onClose }: Props) => {
+  const logoutButton = async () => {
+    const response = await putLogout()
+    console.log(response)
+  }
+
   const onClickBackground = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose()
     }
   }
-  const user = { name: '테스터', email: 'tester@naver.com' }
+  const userName = localStorage.getItem('userName')
+  const phoneNumber = localStorage.getItem('phoneNumber')
   return (
     <>
       <div onClick={onClickBackground} className="fixed inset-0 bg-black bg-opacity-15 z-20">
@@ -18,12 +26,13 @@ export const HamburgerModal = ({ onClose }: Props) => {
           <div className="font-bold pb-4">회원 정보</div>
           <div className="flex  md:flex-row flex-col py-2 md:gap-3">
             <div className="text-typo-content">이름</div>
-            <div className="text-input-text">{user.name}</div>
+            <div className="text-input-text">{userName}</div>
           </div>
-          <div className="flex md:flex-row flex-col py-2  md:gap-3">
-            <div className="text-typo-content">이메일</div>
-            <div className="text-input-text">{user.email}</div>
+          <div className="flex md:flex-row flex-col py-2  md:gap-3 mb-14">
+            <div className="text-typo-content">전화번호</div>
+            <div className="text-input-text">{phoneNumber}</div>
           </div>
+          <Button children="로그아웃" color={'pink'} onClick={logoutButton} />
         </div>
       </div>
     </>
