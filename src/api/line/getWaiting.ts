@@ -2,7 +2,11 @@ import { WaitingType } from "@/types/Waiting.type";
 import axios from "axios"
 
 export const getWaiting = async (id: string) => {
-  const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_ADDRESS}/api/waiting/${id}`);
+  const response = await axios.get(`${import.meta.env.VITE_APP_BACKEND_ADDRESS}/api/waiting/${id}`, {
+    headers: {
+      'Authorization': `${localStorage.getItem('token')}`,
+    },
+  });
   const returnValue: WaitingType = {
     waitingStatus: "PENDING",
     time: 0,

@@ -26,11 +26,11 @@ export const WaitingFunnel = () => {
 
     const get = async () => {
       if (id) {
+        const organInfo = await getOrganDetail(id);
+        setOrganization(organInfo.data);
         const waitingInfo = await getWaiting(id);
         setWaitingInfo(waitingInfo);
         setStep(waitingInfo.waitingStatus);
-        const organInfo = await getOrganDetail(id);
-        setOrganization(organInfo.data);
       } else {
         navigate('/waitings')
       }
@@ -41,7 +41,7 @@ export const WaitingFunnel = () => {
   }, [id, step])
 
 
-  if (!id || !waitingInfo || !organization) {
+  if (!id || !organization) {
     return (
       <div>
         Loading...
@@ -59,11 +59,11 @@ export const WaitingFunnel = () => {
             imgUrl={dummyImg}
             // imgUrl={organization.imgUrl}
             description={organization.introduce!}
-            currentWaitingNumber={waitingInfo.currentWaitingNumber!}
-            time={waitingInfo.time}
+            currentWaitingNumber={waitingInfo ? waitingInfo.currentWaitingNumber! : 0}
+            time={waitingInfo ? waitingInfo.time : 0}
             onNext={() => { setStep("WAITING") }}
           />}
-          {step == "WAITING" && <Waiting
+          {waitingInfo && step == "WAITING" && <Waiting
             id={id}
             imgUrl={dummyImg}
             // imgUrl={organization.imgUrl}
@@ -73,7 +73,7 @@ export const WaitingFunnel = () => {
             headCount={waitingInfo.headCount!}
             onCancel={() => { setStep("NOT-WAITING") }}
           />}
-          {step == "PENDING" && <Pending
+          {waitingInfo && step == "PENDING" && <Pending
             id={id}
             imgUrl={dummyImg}
             // imgUrl={organization.imgUrl}

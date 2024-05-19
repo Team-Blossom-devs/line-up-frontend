@@ -5,6 +5,7 @@ export const postSignIn = async (managerName: string, password: string) => {
     managerName: managerName,
     password: password,
   })
+  console.log(response);
   const token = response.headers['authorization']
-  return token
+  return [token, response.data]
 }

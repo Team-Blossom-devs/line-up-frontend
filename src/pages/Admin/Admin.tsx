@@ -5,18 +5,34 @@ import { Row } from "@/components/AdminRow/Row"
 import { Logo } from "@/components/Logo/Logo"
 import { Title } from "@/components/Waiting/WaitingComponent"
 import { TableType } from "@/types/Table.type"
-import { useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
+import { ContextType } from "./AdminFunnel"
+import { getOrganDetail } from "@/api/organization/getOrganDetail"
+// import { useNavigate } from "react-router-dom"
+import { Organization } from "@/types/Organization.type"
 
-export const Admin = () => {
+export const Admin = ({ roleContext }: { roleContext: React.Context<ContextType | null> }) => {
 
   const cursor = useRef<string>("");
-
+  const { role, organId } = useContext(roleContext)!;
+  // 아직 로그인 시 받는 데이터 반영이 안 돼서 좀따가 할 것
+  // const navigate = useNavigate();
   const [waitingList, setWaitingList] = useState<TableType[]>([]);
+  const [organization, setOrganization] = useState<Organization>();
 
   useEffect(() => {
+
+    console.log(role, organId);
+    // if (role !== 'MANAGER') {
+    //   navigate('/', { replace: true });
+    // }
+
     const get = async () => {
-      const response = await getWaitingList(2, cursor.current);
+      const response = await getWaitingList(10, cursor.current);
       cursor.current = response.data.cursorId;
+
+      const organInfo = await getOrganDetail('1');
+      setOrganization(organInfo.data);
       setWaitingList([...waitingList, ...response.data.waitingDetails])
     }
     get();
@@ -38,10 +54,10 @@ export const Admin = () => {
     <div className="flex flex-col items-center">
       <Logo />
       <Title title="관리자 페이지" className="text-btn-pink" />
-      <Title title="컴공 ㅇㅇㅇ 주점 현황표" className="text-xl my-10" />
+      <Title title={`${organization ? organization.name : ""} 주점 현황표`} className="text-xl my-10" />
       <div className="w-11/12 flex text-sm justify-between font-bold whitespace-nowrap">
-        <p>총 대기 중인 팀 수: {20}팀</p>
-        <p>가용 테이블 현황: {3}</p>
+        <p>총 대기 중인 팀 수: {waitingList.length}팀</p>
+        <p>가용 테이블 현황: {organization ? organization.tableCount : 0 - waitingList.filter((it) => it.entranceStatus === "COMPLETE").length} / {organization?.tableCount}</p>
       </div>
       <table className="w-11/12 text-center">
         <thead>

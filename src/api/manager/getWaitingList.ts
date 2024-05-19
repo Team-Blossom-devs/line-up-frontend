@@ -5,11 +5,15 @@ export const getWaitingList = async (size: number, cursor: string) => {
     params: {
       size: size,
       cursor: cursor
-    }
+    }, headers: {
+      'Authorization': `${localStorage.getItem('token')}`,
+    },
   } : {
     params: {
       size: size
-    }
+    }, headers: {
+      'Authorization': `${localStorage.getItem('token')}`,
+    },
   })
   return response.data;
 }

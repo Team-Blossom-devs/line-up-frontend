@@ -25,7 +25,7 @@ const NotWaiting = ({ id, imgUrl, description, currentWaitingNumber, time, onNex
       </Block>
       <Block>
         <Description description={`대기팀 ${currentWaitingNumber}팀`} />
-        <Description description={`예상 대기시간 약 ${Math.floor(time / 60)}시간 ${time % 60}분`} />
+        <Description description={`예상 대기시간 약 ${time > 60 ? (Math.floor(time / 60) + "시간") : ""} ${time % 60}분`} />
         <input
           type="number"
           value={headCount}
