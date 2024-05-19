@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Logo } from '@/components/Logo/Logo'
 import { Input } from '@/components/Input/Input'
@@ -10,12 +10,25 @@ export const Signup = () => {
   const [userName, setUserName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const token = urlParams.get('token')
+
+    if (token) {
+      localStorage.setItem('token', token)
+      console.log(token)
+    }
+  }, [navigate])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     try {
       const response = await postSignUp(userName, phoneNumber)
       console.log(response)
+      localStorage.setItem('userName', userName)
+      localStorage.setItem('phoneNumber', phoneNumber)
+
       window.alert('회원가입이 완료되었습니다.')
       navigate('/viewAll')
     } catch (err) {

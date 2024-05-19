@@ -6,12 +6,8 @@ import { postSignIn } from '@/api/login/postSignIn'
 import kakaoLogin from '@/assets/images/kakao_logo.svg'
 
 export const KakaoLogin = () => {
-  const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY
-  const REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI
-  const KAKAO_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
-
   const loginHandler = () => {
-    window.location.href = KAKAO_URL
+    window.location.replace(`${import.meta.env.VITE_APP_BACKEND_ADDRESS}/oauth2/authorization/kakao`)
   }
 
   return (

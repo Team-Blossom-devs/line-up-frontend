@@ -1,26 +1,18 @@
-// import React, { useEffect } from 'react'
-// import { useNavigate } from 'react-router-dom'
-// import { postKakaoLogin } from '@/api/login/postKakaoLogin'
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const Auth = () => {
-  // const navigate = useNavigate()
-  // const params = new URL(window.location.href).searchParams
-  // const code = params.get('code')
+  const navigate = useNavigate()
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const token = urlParams.get('token')
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await postKakaoLogin(code)
-  //       console.log(response)
-  //       navigate('/signup')
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   if (code) {
-  //     fetchData()
-  //   }
-  // }, [code, navigate])
+    if (token) {
+      localStorage.setItem('token', token)
+      console.log(token)
+      navigate('/signup', { replace: true })
+    }
+  }, [navigate])
 
   return <></>
 }
