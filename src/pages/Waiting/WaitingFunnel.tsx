@@ -9,7 +9,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { WaitingType } from "@/types/Waiting.type";
 import { Organization } from "@/types/Organization.type";
 
-import dummyImg from "../../assets/images/주점_메뉴.jpg";
 import { Header } from "@/components/Header/Header";
 
 
@@ -57,8 +56,7 @@ export const WaitingFunnel = () => {
           <>
             {id && step == "NOT-WAITING" && <NotWaiting
               id={id}
-              imgUrl={dummyImg}
-              // imgUrl={organization.imageUrl}
+              imgUrl={organization.imageUrl}
               description={organization.introduce!}
               currentWaitingNumber={waitingInfo ? waitingInfo.currentWaitingNumber! : 0}
               time={waitingInfo ? waitingInfo.time : 0}
@@ -66,8 +64,7 @@ export const WaitingFunnel = () => {
             />}
             {waitingInfo && step == "WAITING" && <Waiting
               id={id}
-              imgUrl={dummyImg}
-              // imgUrl={organization.imageUrl}
+              imgUrl={organization.imageUrl}
               description={organization.introduce!}
               currentWaitingNumber={waitingInfo.currentWaitingNumber!}
               time={waitingInfo.time}
