@@ -91,6 +91,7 @@ export const ViewAll = () => {
           {organizations.map((org) => (
             <Bar
               key={org.id}
+              imageUrl={org.imageUrl}
               name={org.name}
               location={org.location}
               time={`${org.openTime} - ${org.closeTime}`}
