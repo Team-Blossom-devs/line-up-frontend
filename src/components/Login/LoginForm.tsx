@@ -38,8 +38,8 @@ export const LoginForm = ({ roleContext }: { roleContext: React.Context<ContextT
 
       if (token) {
         localStorage.setItem('token', token);
-        setRole(response.role);
-        setOrganId(response.OrganzationId);
+        setRole(response.data.role);
+        setOrganId(response.data.organizationId);
         window.alert('로그인이 완료되었습니다.')
         navigate('/admin')
       } else {
