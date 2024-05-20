@@ -12,6 +12,7 @@ export default {
         'btn-red': '#F79E89',
         'icon-color': '#FB99AA',
         'input-text': '#cfcfcf',
+        'valid-text': '#aa2e25',
       },
     },
   },
