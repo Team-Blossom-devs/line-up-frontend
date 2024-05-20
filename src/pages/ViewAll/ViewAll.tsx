@@ -12,6 +12,7 @@ interface Organization {
   tableCount: number
   openTime: string
   closeTime: string
+  imageUrl: string
 }
 
 export const ViewAll = () => {
@@ -24,13 +25,28 @@ export const ViewAll = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      const urlParams = new URLSearchParams(window.location.search)
+      const token = urlParams.get('token')
+
+      if (token) {
+        localStorage.setItem('token', token)
+        console.log(token)
+      }
+
       try {
         const response = await getSearch(searchTerm, pageNum)
-        const searchOrganizations = response.data.organizationDtoList.filter((org: Organization) =>
-          org.name.includes(searchTerm)
-        )
-        setOrganizations(searchOrganizations)
-        setTotalPages(response.data.totalPages)
+        console.log('response: ', response)
+
+        if (response.data && response.data.organizationListDtoList) {
+          const searchOrganizations = response.data.organizationListDtoList.filter((org: Organization) =>
+            org.name.includes(searchTerm)
+          )
+          setOrganizations(searchOrganizations)
+          setTotalPages(response.data.totalPages || 1)
+        } else {
+          setOrganizations([])
+          setTotalPages(1)
+        }
       } catch (err) {
         console.log(err)
       }
