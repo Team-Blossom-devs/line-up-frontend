@@ -27,8 +27,10 @@ const Waiting = ({ id, imgUrl, description, currentWaitingNumber, time, headCoun
         <Description description={`대기 인원 ${headCount}명`} />
         <div className="flex justify-end">
           <Button onClick={() => {
-            deleteWaiting(id)
-            onCancel();
+            if (window.confirm('대기 취소하시겠습니까?')) {
+              deleteWaiting(id)
+              onCancel();
+            }
           }} color="red" className="text-white text-sm px-3 py-1">대기 취소</Button>
         </div>
       </Block>
