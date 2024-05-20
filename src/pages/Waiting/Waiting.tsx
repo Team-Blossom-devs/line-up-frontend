@@ -23,7 +23,7 @@ const Waiting = ({ id, imgUrl, description, currentWaitingNumber, time, headCoun
       </Block>
       <Block>
         <Description description={`대기팀 ${currentWaitingNumber}팀`} />
-        <Description description={`입장까지 약 ${Math.floor(time / 60)}시간 ${time % 60}분 남았습니다.`} />
+        <Description description={`입장까지 약 ${time > 60 ? (Math.floor(time / 60) + "시간") : ""} ${time % 60}분 남았습니다.`} />
         <Description description={`대기 인원 ${headCount}명`} />
         <div className="flex justify-end">
           <Button onClick={() => {
