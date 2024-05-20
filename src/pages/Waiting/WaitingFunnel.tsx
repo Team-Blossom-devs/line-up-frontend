@@ -63,7 +63,7 @@ export const WaitingFunnel = () => {
               onNext={() => { setStep("WAITING") }}
             />}
             {waitingInfo && step == "WAITING" && <Waiting
-              id={id}
+              id={waitingInfo.waitingId!}
               imgUrl={organization.imageUrl}
               description={organization.introduce!}
               currentWaitingNumber={waitingInfo.currentWaitingNumber!}
@@ -72,7 +72,7 @@ export const WaitingFunnel = () => {
               onCancel={() => { setStep("NOT-WAITING") }}
             />}
             {waitingInfo && step == "PENDING" && <Pending
-              id={id}
+              id={waitingInfo.waitingId!}
               imgUrl={waitingInfo.qrUrl!}
               time={waitingInfo.time}
             />}
