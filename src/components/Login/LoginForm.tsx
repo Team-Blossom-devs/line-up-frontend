@@ -5,7 +5,6 @@ import { Button } from '@/components/Button/Button'
 import { postSignIn } from '@/api/login/postSignIn'
 import kakaoLogin from '@/assets/images/kakao_logo.svg'
 
-
 export const KakaoLogin = () => {
   const loginHandler = () => {
     window.location.replace(`${import.meta.env.VITE_APP_BACKEND_ADDRESS}/oauth2/authorization/kakao`)
@@ -29,14 +28,15 @@ export const LoginForm = () => {
     e.preventDefault()
 
     try {
-      const [token, response] = await postSignIn(managerName, password);
+      const [token, response] = await postSignIn(managerName, password)
 
       if (token) {
-        localStorage.setItem('token', token);
-        localStorage.setItem('role', response.data.role);
-        localStorage.setItem('organId', response.data.organizationId);
+        localStorage.setItem('token', token)
+        localStorage.setItem('role', response.data.role)
+        localStorage.setItem('organId', response.data.organizationId)
         window.alert('로그인이 완료되었습니다.')
-        navigate('/admin', { replace: true });
+
+        navigate('/admin', { replace: true })
       } else {
         console.error('로그인에 실패하셨습니다.')
       }
