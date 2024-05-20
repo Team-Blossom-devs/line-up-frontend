@@ -7,7 +7,7 @@
 }
 
 .label {
-  @apply text-typo-content flex justify-center items-center;
+  @apply text-typo-content flex flex-col;
 }
 
 .form {
