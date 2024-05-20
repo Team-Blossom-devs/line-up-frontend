@@ -16,7 +16,7 @@ export default function Router() {
         <Route path="/viewAll" element={<ViewAll />} />
         <Route path="/oauth" element={<Auth />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/adminLogin" element={<Login />} />
+        <Route path="/admin/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
     </>
