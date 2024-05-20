@@ -3,6 +3,6 @@ export interface Organization {
   tableCount: number;
   name: string;
   introduce: string;
-  imgUrl: string;
+  imageUrl: string;
   location: string;
 }
