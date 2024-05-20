@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Input } from '@/components/Input/Input'
 import { Button } from '@/components/Button/Button'
 import { postSignIn } from '@/api/login/postSignIn'
 import kakaoLogin from '@/assets/images/kakao_logo.svg'
-import { ContextType } from "@/pages/Admin/AdminFunnel"
 
 
 export const KakaoLogin = () => {
@@ -22,14 +21,10 @@ export const KakaoLogin = () => {
   )
 }
 
-export const LoginForm = ({ roleContext }: { roleContext: React.Context<ContextType | null> }) => {
+export const LoginForm = () => {
   const navigate = useNavigate()
   const [managerName, setManagerName] = useState('')
   const [password, setPassword] = useState('')
-
-  const setRole = useContext(roleContext)!.setRole;
-  const setOrganId = useContext(roleContext)!.setOrganId;
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -38,10 +33,10 @@ export const LoginForm = ({ roleContext }: { roleContext: React.Context<ContextT
 
       if (token) {
         localStorage.setItem('token', token);
-        setRole(response.data.role);
-        setOrganId(response.data.organizationId);
+        localStorage.setItem('role', response.data.role);
+        localStorage.setItem('organId', response.data.organizationId);
         window.alert('로그인이 완료되었습니다.')
-        navigate('/admin')
+        navigate('/admin', { replace: true });
       } else {
         console.error('로그인에 실패하셨습니다.')
       }
