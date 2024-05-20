@@ -15,6 +15,7 @@ export const getWaiting = async (id: string) => {
   // 대기 현황 조회 - 대기 상태
   if (response && response.data.data.waitingStatus == "WAITING") {
     returnValue.waitingStatus = "WAITING";
+    returnValue.waitingId = response.data.data.waitingId;
     returnValue.time = response.data.data.expectWaitingTime;
     returnValue.headCount = response.data.data.headCount;
     returnValue.currentWaitingNumber = response.data.data.currentWaitingNumber;
@@ -25,6 +26,7 @@ export const getWaiting = async (id: string) => {
   else if (response && response.data.data.waitingStatus == "PENDING") {
     const qrResponse = await axios.get(`${import.meta.env.VITE_APP_BACKEND_ADDRESS}/api/waiting/qr/${id}`);
     returnValue.waitingStatus = "PENDING";
+    returnValue.waitingId = response.data.data.waitingId;
     returnValue.time = response.data.data.remainMinutes;
     returnValue.qrUrl = qrResponse.data;
   }
