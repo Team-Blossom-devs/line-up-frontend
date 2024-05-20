@@ -8,7 +8,7 @@ type Props = {
 
 export const HamburgerModal = ({ onClose }: Props) => {
   const logoutButton = async () => {
-    const confirmModal = window.confirm('로그아웃 하시겠습니까? 확인 버튼을 누르시면 메인화면으로 이동됩니다.')
+    const confirmModal = window.confirm('로그아웃 하시겠습니까? 확인 버튼을 누르시면 메인 페이지로 이동됩니다.')
 
     if (confirmModal) {
       try {

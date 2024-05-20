@@ -14,6 +14,9 @@ export default {
         'input-text': '#cfcfcf',
         'valid-text': '#aa2e25',
       },
+      fontFamily: {
+        'sf-pro-display': ['"SF Pro Display"', 'sans-serif'],
+      },
     },
   },
   plugins: [],
