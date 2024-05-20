@@ -8,8 +8,17 @@ type Props = {
 
 export const HamburgerModal = ({ onClose }: Props) => {
   const logoutButton = async () => {
-    const response = await putLogout()
-    console.log(response)
+    const confirmModal = window.confirm('로그아웃 하시겠습니까? 확인 버튼을 누르시면 메인 페이지로 이동됩니다.')
+
+    if (confirmModal) {
+      try {
+        const response = await putLogout()
+        console.log(response)
+        window.location.href = '/'
+      } catch (error) {
+        console.log('로그아웃 실패')
+      }
+    }
   }
 
   const onClickBackground = (e: React.MouseEvent<HTMLDivElement>) => {

@@ -8,14 +8,16 @@ interface propsType {
   location: string
   time: string
   table: string
+  imageUrl: string | null
   onClick: () => void
 }
 
-export const Bar = ({ name, location, time, table, onClick }: propsType) => {
+export const Bar = ({ name, location, imageUrl, time, table, onClick }: propsType) => {
+  const defaultImage = Container
   return (
     <>
       <div onClick={onClick} className="flex flex-col w-full">
-        <img src={Container} className="rounded-xl" />
+        <img src={imageUrl || defaultImage} className="rounded-xl" />
         <div className="flex flex-col my-5 gap-2 text-icon-color">
           <div className="text-black font-bold">{name}</div>
           <div className="flex flex-row gap-2">
