@@ -1,4 +1,3 @@
-import { Logo } from "@/components/Logo/Logo"
 import { Title } from "@/components/Waiting/WaitingComponent"
 import { useEffect, useState } from "react";
 import { getWaiting } from "@/api/line/getWaiting";
@@ -11,6 +10,7 @@ import { WaitingType } from "@/types/Waiting.type";
 import { Organization } from "@/types/Organization.type";
 
 import dummyImg from "../../assets/images/주점_메뉴.jpg";
+import { Header } from "@/components/Header/Header";
 
 
 export const WaitingFunnel = () => {
@@ -50,37 +50,38 @@ export const WaitingFunnel = () => {
   }
   else {
     return (
-      <div className="flex flex-col items-center">
-        <Logo />
-        <Title title={organization.name} className="text-left" />
-        <>
-          {id && step == "NOT-WAITING" && <NotWaiting
-            id={id}
-            imgUrl={dummyImg}
-            // imgUrl={organization.imgUrl}
-            description={organization.introduce!}
-            currentWaitingNumber={waitingInfo ? waitingInfo.currentWaitingNumber! : 0}
-            time={waitingInfo ? waitingInfo.time : 0}
-            onNext={() => { setStep("WAITING") }}
-          />}
-          {waitingInfo && step == "WAITING" && <Waiting
-            id={id}
-            imgUrl={dummyImg}
-            // imgUrl={organization.imgUrl}
-            description={organization.introduce!}
-            currentWaitingNumber={waitingInfo.currentWaitingNumber!}
-            time={waitingInfo.time}
-            headCount={waitingInfo.headCount!}
-            onCancel={() => { setStep("NOT-WAITING") }}
-          />}
-          {waitingInfo && step == "PENDING" && <Pending
-            id={id}
-            imgUrl={dummyImg}
-            // imgUrl={organization.imgUrl}
-            time={waitingInfo.time}
-          />}
-        </>
-      </div>
+      <>
+        <Header />
+        <Title title={organization.name} className="text-center text-icon-color" />
+        <div className="px-5 flex flex-col text-center">
+          <>
+            {id && step == "NOT-WAITING" && <NotWaiting
+              id={id}
+              imgUrl={dummyImg}
+              // imgUrl={organization.imageUrl}
+              description={organization.introduce!}
+              currentWaitingNumber={waitingInfo ? waitingInfo.currentWaitingNumber! : 0}
+              time={waitingInfo ? waitingInfo.time : 0}
+              onNext={() => { setStep("WAITING") }}
+            />}
+            {waitingInfo && step == "WAITING" && <Waiting
+              id={id}
+              imgUrl={dummyImg}
+              // imgUrl={organization.imageUrl}
+              description={organization.introduce!}
+              currentWaitingNumber={waitingInfo.currentWaitingNumber!}
+              time={waitingInfo.time}
+              headCount={waitingInfo.headCount!}
+              onCancel={() => { setStep("NOT-WAITING") }}
+            />}
+            {waitingInfo && step == "PENDING" && <Pending
+              id={id}
+              imgUrl={waitingInfo.qrUrl!}
+              time={waitingInfo.time}
+            />}
+          </>
+        </div>
+      </>
     )
   }
 }
