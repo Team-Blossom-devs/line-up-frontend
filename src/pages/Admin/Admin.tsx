@@ -1,5 +1,4 @@
 import { getWaitingList } from "@/api/manager/getWaitingList"
-import { patchEnetrance } from "@/api/manager/patchEnetrance"
 import { patchRestoration } from "@/api/manager/patchRestoration"
 import { Row } from "@/components/AdminRow/Row"
 import { Logo } from "@/components/Logo/Logo"
@@ -10,6 +9,8 @@ import { ContextType } from "./AdminFunnel"
 import { getOrganDetail } from "@/api/organization/getOrganDetail"
 // import { useNavigate } from "react-router-dom"
 import { Organization } from "@/types/Organization.type"
+import { deleteWaiting } from "@/api/line/deleteWaiting"
+import { patchEntrance } from "@/api/manager/patchEntrance"
 
 export const Admin = ({ roleContext }: { roleContext: React.Context<ContextType | null> }) => {
 
@@ -46,8 +47,13 @@ export const Admin = ({ roleContext }: { roleContext: React.Context<ContextType 
   }
 
   const handleEnetrance = async (id: string) => {
-    const response = await patchEnetrance(id);
+    const response = await patchEntrance(id);
     setWaitingList(waitingList.map((it) => it.id == response.data.id ? response.data : it))
+  }
+
+  const handleDelete = async (id: string) => {
+    await deleteWaiting(id);
+    setWaitingList(waitingList.filter((it) => it.id != id));
   }
 
   return (
@@ -57,7 +63,7 @@ export const Admin = ({ roleContext }: { roleContext: React.Context<ContextType 
       <Title title={`${organization ? organization.name : ""} 주점 현황표`} className="text-xl my-10" />
       <div className="w-11/12 flex text-sm justify-between font-bold whitespace-nowrap">
         <p>총 대기 중인 팀 수: {waitingList.length}팀</p>
-        <p>가용 테이블 현황: {organization ? organization.tableCount : 0 - waitingList.filter((it) => it.entranceStatus === "COMPLETE").length} / {organization?.tableCount}</p>
+        <p>가용 테이블 현황: {organization ? organization.tableCount : 0 - waitingList.filter((it) => it.entranceStatus !== "WAITING").length} / {organization?.tableCount}</p>
       </div>
       <table className="w-11/12 text-center">
         <thead>
@@ -81,6 +87,7 @@ export const Admin = ({ roleContext }: { roleContext: React.Context<ContextType 
               status={it.entranceStatus}
               handleRestoration={handleRestoration}
               handleEnetrance={handleEnetrance}
+              handleDelete={handleDelete}
             />
           ))}
         </tbody>

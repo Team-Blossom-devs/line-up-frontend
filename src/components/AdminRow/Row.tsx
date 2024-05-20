@@ -9,9 +9,10 @@ interface RowProps {
   status: Status;
   handleRestoration: (id: string) => void;
   handleEnetrance: (id: string) => void;
+  handleDelete: (id: string) => void;
 }
 
-export const Row = ({ id, name, count, phone, time, status, handleRestoration, handleEnetrance }: RowProps) => {
+export const Row = ({ id, name, count, phone, time, status, handleRestoration, handleEnetrance, handleDelete }: RowProps) => {
   return (
     <tr className="text-sm whitespace-nowrap w-full border-y-2">
       <td className="py-8">
@@ -31,7 +32,10 @@ export const Row = ({ id, name, count, phone, time, status, handleRestoration, h
         <ActiveStatus status={status} />
       </td>
       <td>
-        <button>삭제</button>
+        <button onClick={() => {
+          handleDelete(id);
+          console.log(id);
+        }}>삭제</button>
       </td>
     </tr>
   )
