@@ -30,12 +30,10 @@ export const ViewAll = () => {
 
       if (token) {
         localStorage.setItem('token', token)
-        console.log(token)
       }
 
       try {
         const response = await getSearch(searchTerm, pageNum)
-        console.log('response: ', response)
 
         if (response.data && response.data.organizationListDtoList) {
           const searchOrganizations = response.data.organizationListDtoList.filter((org: Organization) =>

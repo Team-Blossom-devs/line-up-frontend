@@ -17,8 +17,11 @@ export const Signup = () => {
     if (token) {
       localStorage.setItem('token', token)
       console.log(token)
+    } else {
+      window.alert('올바른 경로로 접근해주세요.')
+      navigate('/')
     }
-  }, [])
+  }, [navigate])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
