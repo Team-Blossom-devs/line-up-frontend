@@ -47,18 +47,24 @@ export const Admin = () => {
   }, [waitingList, organization])
 
   const handleRestoration = async (id: string) => {
-    const response = await patchRestoration(id);
-    setWaitingList(waitingList.map((it) => it.id == response.data.id ? response.data : it))
+    if (window.confirm(`${waitingList.find(it => it.id === id)?.name}을 입장중에서 대기중으로 변경하시겠습니까?`)) {
+      const response = await patchRestoration(id);
+      setWaitingList(waitingList.map((it) => it.id == response.data.id ? response.data : it))
+    }
   }
 
   const handleEnetrance = async (id: string) => {
-    const response = await patchEntrance(id);
-    setWaitingList(waitingList.map((it) => it.id == response.data.id ? response.data : it))
+    if (window.confirm(`${waitingList.find(it => it.id === id)?.name}을 대기중에서 입장중으로 변경하시겠습니까?`)) {
+      const response = await patchEntrance(id);
+      setWaitingList(waitingList.map((it) => it.id == response.data.id ? response.data : it))
+    }
   }
 
   const handleDelete = async (id: string) => {
-    await deleteWaiting(id);
-    setWaitingList(waitingList.filter((it) => it.id != id));
+    if (window.confirm(`${waitingList.find(it => it.id === id)?.name}을 삭제하시겠습니까?`)) {
+      await deleteWaiting(id);
+      setWaitingList(waitingList.filter((it) => it.id != id));
+    }
   }
 
   return (

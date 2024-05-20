@@ -34,7 +34,6 @@ export const Row = ({ id, name, count, phone, time, status, handleRestoration, h
       <td>
         <button onClick={() => {
           handleDelete(id);
-          console.log(id);
         }}>삭제</button>
       </td>
     </tr>
