@@ -12,19 +12,16 @@ export const HamburgerModal = ({ onClose }: Props) => {
   const logoutButton = async () => {
     const role = localStorage.getItem('role')
     const confirmModal = window.confirm('로그아웃 하시겠습니까?')
-    console.log(role)
+    console.log(`role: ${role}`)
     if (confirmModal) {
       try {
+        const response = await putLogout()
+        console.log(response)
+        alert('로그아웃이 완료되었습니다.')
+        localStorage.clear()
         if (role === 'MANAGER') {
-          const response = await putLogout()
-          console.log(response)
-          alert('로그아웃이 완료되었습니다.')
-          localStorage.removeItem('role')
           window.location.href = '/admin/login'
         } else {
-          const response = await putLogout()
-          console.log(response)
-          alert('로그아웃이 완료되었습니다.')
           window.location.href = '/'
         }
       } catch (error) {
