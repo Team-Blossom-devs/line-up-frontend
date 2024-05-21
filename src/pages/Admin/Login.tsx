@@ -1,16 +1,15 @@
 import { Logo } from '@/components/Logo/Logo'
 import { LoginForm } from '@/components/Login/LoginForm'
-// import { Navigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 
 function Login() {
 
-  // if (localStorage.getItem('token')) {
-  //   return (
-  //     <Navigate to={'/admin'} />
-  //   )
-  // }
-  // else
-  {
+  if (localStorage.getItem('token')) {
+    return (
+      <Navigate to={'/admin'} />
+    )
+  }
+  else {
     return (
       <>
         <div className="container mt-20 items-center">
