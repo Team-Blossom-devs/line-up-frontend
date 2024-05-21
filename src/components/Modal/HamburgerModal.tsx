@@ -10,15 +10,16 @@ type Props = {
 
 export const HamburgerModal = ({ onClose }: Props) => {
   const logoutButton = async () => {
+    const role = localStorage.getItem('role')
     const confirmModal = window.confirm('로그아웃 하시겠습니까?')
-
+    console.log(role)
     if (confirmModal) {
-      const role = localStorage.getItem('role')
       try {
         if (role === 'MANAGER') {
           const response = await putLogout()
           console.log(response)
           alert('로그아웃이 완료되었습니다.')
+          localStorage.removeItem('role')
           window.location.href = '/admin/login'
         } else {
           const response = await putLogout()
@@ -49,15 +50,15 @@ export const HamburgerModal = ({ onClose }: Props) => {
             <>
               <div className="flex gap-2 items-center">
                 <IoMdPerson size={20} className="mb-2" />
-                <div className="font-bold text-typo-content pb-1  text-lg">회원 정보</div>
+                <div className="font-bold text-typo-content pb-1">회원 정보</div>
               </div>
 
               <div className="flex md:flex-row flex-col py-2 md:gap-3">
-                <div className="text-typo-content w-1/5">이름</div>
+                <div className="text-typo-content md:w-1/5">이름</div>
                 <div className="text-input-text">{userName}</div>
               </div>
               <div className="flex md:flex-row flex-col py-2 md:gap-3 mb-8">
-                <div className="text-typo-content w-1/5">전화번호</div>
+                <div className="text-typo-content md:w-1/5">전화번호</div>
                 <div className="text-input-text">{phoneNumber}</div>
               </div>
             </>
@@ -65,24 +66,24 @@ export const HamburgerModal = ({ onClose }: Props) => {
           <div className="flex flex-col py-2 ">
             <div className="flex gap-2 items-center">
               <MdAccessTimeFilled size={20} className="mb-2" />
-              <div className="font-bold text-typo-content pb-1  text-lg">서버 운영 기간</div>
+              <div className="font-bold text-typo-content pb-1">서버 운영 기간</div>
             </div>
             <div className="text-input-text mb-10">24.05.22 ~ 24.05.24</div>
 
-            <div className="font-bold text-typo-content mb-2 text-lg">@ Team blossom</div>
+            <div className="font-bold text-typo-content">@ Team blossom</div>
             <div className="flex md:flex-row flex-col py-2 md:gap-3">
               <div className="text-typo-content w-1/5">문의</div>
-              <a href="mailto:team.blossom.devs@gmail.com" target="_blank" className="text-input-text">
+              <a href="mailto:team.blossom.devs@gmail.com" target="_blank" className=" text-input-text text-sm ">
                 team.blossom.devs@gmail.com
               </a>
             </div>
             <div className="flex md:flex-row flex-col py-2 md:gap-3">
               <div className="text-typo-content w-1/5">Backend</div>
-              <div className="text-input-text">박제영 이건 이재은 임현정</div>
+              <div className="text-input-text text-sm">박제영 이건 이재은 임현정</div>
             </div>
             <div className="flex md:flex-row flex-col py-2 md:gap-3 mb-8">
               <div className="text-typo-content w-1/5">Frontend</div>
-              <div className="text-input-text mb-4">김혜연 이강혁</div>
+              <div className="text-input-text text-sm mb-4">김혜연 이강혁</div>
             </div>
           </div>
           <Button children="로그아웃" color={'pink'} onClick={logoutButton} />
