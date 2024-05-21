@@ -20,7 +20,7 @@ export const Row = ({ id, name, count, phone, time, status, handleRestoration, h
         <p>{count}명</p>
       </td>
       <td>{phone}</td>
-      <td>{time ? (Math.floor((new Date().getTime() - new Date(time).getTime()) / (1000 * 60))) : ""}</td>
+      <td>{time ? (Math.floor((new Date().getTime() - new Date(time).getTime()) / (1000 * 60))) + "분" : ""}</td>
       <td onClick={() => {
         if (status == 'PENDING') {
           handleRestoration(id);
