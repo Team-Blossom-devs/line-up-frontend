@@ -30,7 +30,7 @@ export const Admin = () => {
     // }
 
     const get = async () => {
-      const response = await getWaitingList(10, cursor.current);
+      const response = await getWaitingList(100, cursor.current);
       cursor.current = response.data.cursorId;
 
       const organInfo = await getOrganDetail('1');
@@ -43,7 +43,17 @@ export const Admin = () => {
   }, [])
 
   useEffect(() => {
-    if (organization && waitingList) { setTableCount(organization.tableCount - waitingList.filter((it) => it.entranceStatus !== "WAITING").length); }
+    if (organization && waitingList) {
+      setTableCount(
+        organization.tableCount -
+        waitingList.reduce((prev, it) => {
+          if (it.entranceStatus === "COMPLETE") {
+            return prev + it.tableCount!
+          } else {
+            return prev;
+          }
+        }, 0));
+    }
   }, [waitingList, organization])
 
   const handleRestoration = async (id: string) => {
@@ -90,7 +100,7 @@ export const Admin = () => {
         <table className="w-full text-center">
           <thead>
             <tr className="text-sm">
-              <td className="w-2/10 py-5 whitespace-nowrap">이름</td>
+              <td className="w-2/10 py-5 whitespace-nowrap">이름<br />(인원/번호)</td>
               <td className="w-3/10 whitespace-nowrap">전화번호</td>
               <td className="w-3/10 whitespace-nowrap">이용 시간</td>
               <td className="w-1/10 whitespace-nowrap">입장 상태</td>
@@ -107,6 +117,7 @@ export const Admin = () => {
                 phone={it.phoneNumber}
                 time={it.entranceTime}
                 status={it.entranceStatus}
+                tableNumber={it.tableNumber!}
                 handleRestoration={handleRestoration}
                 handleEnetrance={handleEnetrance}
                 handleDelete={handleDelete}

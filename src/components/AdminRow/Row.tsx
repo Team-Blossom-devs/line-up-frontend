@@ -7,17 +7,18 @@ interface RowProps {
   phone: string;
   time: string;
   status: Status;
+  tableNumber: string;
   handleRestoration: (id: string) => void;
   handleEnetrance: (id: string) => void;
   handleDelete: (id: string) => void;
 }
 
-export const Row = ({ id, name, count, phone, time, status, handleRestoration, handleEnetrance, handleDelete }: RowProps) => {
+export const Row = ({ id, name, count, phone, tableNumber, time, status, handleRestoration, handleEnetrance, handleDelete }: RowProps) => {
   return (
     <tr className="text-sm whitespace-nowrap w-full border-y-2">
       <td className="py-8">
         <p>{name}</p>
-        <p>{count}명</p>
+        <p>{count}명{tableNumber ? ` / ${tableNumber}번` : ""}</p>
       </td>
       <td>{phone}</td>
       <td>{time ? (Math.floor((new Date().getTime() - new Date(time).getTime()) / (1000 * 60))) + "분" : ""}</td>

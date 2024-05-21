@@ -14,6 +14,6 @@ export const getWaitingList = async (size: number, cursor: string) => {
     }, headers: {
       'Authorization': `${localStorage.getItem('token')}`,
     },
-  })
+  });
   return response.data;
 }
