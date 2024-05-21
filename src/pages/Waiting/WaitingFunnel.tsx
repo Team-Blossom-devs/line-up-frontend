@@ -60,6 +60,10 @@ export const WaitingFunnel = () => {
               description={organization.introduce!}
               currentWaitingNumber={waitingInfo ? waitingInfo.currentWaitingNumber! : 0}
               time={waitingInfo ? waitingInfo.time : 0}
+              location={organization.location}
+              table={organization.tableCount}
+              openTime={organization.openTime}
+              closeTime={organization.closeTime}
               onNext={() => { setStep("WAITING") }}
             />}
             {waitingInfo && step == "WAITING" && <Waiting
@@ -68,6 +72,10 @@ export const WaitingFunnel = () => {
               description={organization.introduce!}
               currentWaitingNumber={waitingInfo.currentWaitingNumber!}
               time={waitingInfo.time}
+              location={organization.location}
+              table={organization.tableCount}
+              openTime={organization.openTime}
+              closeTime={organization.closeTime}
               headCount={waitingInfo.headCount!}
               onCancel={() => { setStep("NOT-WAITING") }}
             />}
