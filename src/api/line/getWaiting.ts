@@ -24,7 +24,8 @@ export const getWaiting = async (id: string) => {
   // 대기 현황 조회 - 입장 중
   // QR요청 보내서 따로 받아와야함
   else if (response && response.data.data.waitingStatus == "PENDING") {
-    const qrResponse = await axios.get(`${import.meta.env.VITE_APP_BACKEND_ADDRESS}/api/waiting/qr/${id}`);
+    const qrResponse = await axios.get(`${import.meta.env.VITE_APP_BACKEND_ADDRESS}/api/waiting/qr-code/${id}`);
+    console.log(qrResponse);
     returnValue.waitingStatus = "PENDING";
     returnValue.waitingId = response.data.data.waitingId;
     returnValue.time = response.data.data.remainMinutes;
