@@ -8,13 +8,13 @@ import Pending from "./Pending";
 import { useNavigate, useParams } from "react-router-dom";
 import { WaitingType } from "@/types/Waiting.type";
 import { Organization } from "@/types/Organization.type";
-
 import { Header } from "@/components/Header/Header";
+import { deleteWaiting } from "@/api/line/deleteWaiting";
 
 
 export const WaitingFunnel = () => {
 
-  const [step, setStep] = useState<"PENDING" | "WAITING" | "NOT-WAITING">("NOT-WAITING");
+  const [step, setStep] = useState<"PENDING" | "WAITING" | "NOT-WAITING" | "DEPRECATED" | "NOT-FOUND">("NOT-WAITING");
   const id = useParams().id;
   const navigate = useNavigate();
 
@@ -24,14 +24,24 @@ export const WaitingFunnel = () => {
   useEffect(() => {
 
     const get = async () => {
-      if (id) {
+      if (id && !isNaN(parseInt(id))) {
         const organInfo = await getOrganDetail(id);
         setOrganization(organInfo.data);
         const waitingInfo = await getWaiting(id);
         setWaitingInfo(waitingInfo);
         setStep(waitingInfo.waitingStatus);
+
+        if (waitingInfo.waitingStatus === "DEPRECATED") {
+          alert(waitingInfo.qrUrl);
+          await deleteWaiting(waitingInfo.waitingId!);
+        } else if (waitingInfo.waitingStatus === "NOT-FOUND") {
+          alert(waitingInfo.qrUrl);
+          console.log(waitingInfo.waitingStatus);
+          navigate('/viewAll', { replace: true });
+        }
+
       } else {
-        navigate('/waitings')
+        navigate('/viewAll', { replace: true })
       }
     }
     get();
