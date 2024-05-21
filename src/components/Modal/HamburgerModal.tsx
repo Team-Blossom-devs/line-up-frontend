@@ -69,18 +69,18 @@ export const HamburgerModal = ({ onClose }: Props) => {
 
             <div className="font-bold text-typo-content">@ Team blossom</div>
             <div className="flex md:flex-row flex-col py-2 md:gap-3">
-              <div className="text-typo-content w-1/5">문의</div>
-              <a href="mailto:team.blossom.devs@gmail.com" target="_blank" className=" text-input-text text-sm ">
+              <div className="text-typo-content w-1/5 ">문의</div>
+              <a href="mailto:team.blossom.devs@gmail.com" target="_blank" className=" text-input-text text-xs ">
                 team.blossom.devs@gmail.com
               </a>
             </div>
             <div className="flex md:flex-row flex-col py-2 md:gap-3">
               <div className="text-typo-content w-1/5">Backend</div>
-              <div className="text-input-text text-sm">박제영 이건 이재은 임현정</div>
+              <div className="text-input-text text-sm whitespace-nowrap">박제영 이건 이재은 임현정</div>
             </div>
             <div className="flex md:flex-row flex-col py-2 md:gap-3 mb-8">
               <div className="text-typo-content w-1/5">Frontend</div>
-              <div className="text-input-text text-sm mb-4">김혜연 이강혁</div>
+              <div className="text-input-text text-sm mb-4 whitespace-nowrap">김혜연 이강혁</div>
             </div>
           </div>
           <Button children="로그아웃" color={'pink'} onClick={logoutButton} />
