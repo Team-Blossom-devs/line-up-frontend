@@ -14,7 +14,7 @@ import { deleteWaiting } from "@/api/line/deleteWaiting";
 
 export const WaitingFunnel = () => {
 
-  const [step, setStep] = useState<"PENDING" | "WAITING" | "NOT-WAITING" | "DEPRECATED" | "NOT-FOUND">("NOT-WAITING");
+  const [step, setStep] = useState<"PENDING" | "WAITING" | "NOT-WAITING" | "EXPIRED" | "NOT-FOUND">("NOT-WAITING");
   const id = useParams().id;
   const navigate = useNavigate();
 
@@ -31,9 +31,11 @@ export const WaitingFunnel = () => {
         setWaitingInfo(waitingInfo);
         setStep(waitingInfo.waitingStatus);
 
-        if (waitingInfo.waitingStatus === "DEPRECATED") {
+        if (waitingInfo.waitingStatus === "EXPIRED") {
+          console.log('expired', waitingInfo.waitingId);
           alert(waitingInfo.qrUrl);
           await deleteWaiting(waitingInfo.waitingId!);
+          window.location.reload();
         } else if (waitingInfo.waitingStatus === "NOT-FOUND") {
           alert(waitingInfo.qrUrl);
           console.log(waitingInfo.waitingStatus);

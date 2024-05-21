@@ -75,7 +75,7 @@ const NotWaiting = ({ id, imgUrl, description, currentWaitingNumber, location, t
             postWaiting(id, headCount)
             onNext()
           } else {
-            window.alert(`오픈 시간은 ${openTime}}부터 ${closeTime}까지입니다.`)
+            window.alert(`오픈 시간은 ${openTime}부터 ${closeTime}까지입니다.`)
           }
         }} color="pink" className="w-full text-white font-bold">줄서기</Button>
       </Block>
