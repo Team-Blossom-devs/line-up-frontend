@@ -6,7 +6,7 @@ import { Title } from "@/components/Waiting/WaitingComponent"
 import { TableType } from "@/types/Table.type"
 import { useEffect, useRef, useState } from "react"
 import { getOrganDetail } from "@/api/organization/getOrganDetail"
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom"
 import { Organization } from "@/types/Organization.type"
 import { deleteWaiting } from "@/api/line/deleteWaiting"
 import { patchEntrance } from "@/api/manager/patchEntrance"
@@ -17,7 +17,7 @@ import { HamburgerModal } from "@/components/Modal/HamburgerModal"
 export const Admin = () => {
 
   const cursor = useRef<string>("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [waitingList, setWaitingList] = useState<TableType[]>([]);
   const [organization, setOrganization] = useState<Organization>();
   const [openModal, setOpenModal] = useState(false);
@@ -25,9 +25,9 @@ export const Admin = () => {
 
   useEffect(() => {
 
-    if (localStorage.getItem('role') !== 'MANAGER') {
-      navigate('/', { replace: true });
-    }
+    // if (localStorage.getItem('role') !== 'MANAGER') {
+    //   navigate('/', { replace: true });
+    // }
 
     const get = async () => {
       const response = await getWaitingList(10, cursor.current);

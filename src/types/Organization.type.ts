@@ -5,4 +5,6 @@ export interface Organization {
   introduce: string;
   imageUrl: string;
   location: string;
+  openTime: string;
+  closeTime: string;
 }
