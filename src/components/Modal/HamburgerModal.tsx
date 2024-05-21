@@ -1,6 +1,8 @@
 import React from 'react'
 import { putLogout } from '@/api/login/putLogout'
 import { Button } from '../Button/Button'
+import { IoMdPerson } from 'react-icons/io'
+import { MdAccessTimeFilled } from 'react-icons/md'
 
 type Props = {
   onClose: () => void
@@ -45,20 +47,43 @@ export const HamburgerModal = ({ onClose }: Props) => {
 
           {userName && phoneNumber ? (
             <>
-              <div className="font-bold text-typo-content pb-1">회원 정보</div>
+              <div className="flex gap-2 items-center">
+                <IoMdPerson size={20} className="mb-2" />
+                <div className="font-bold text-typo-content pb-1  text-lg">회원 정보</div>
+              </div>
+
               <div className="flex md:flex-row flex-col py-2 md:gap-3">
-                <div className="text-typo-content">이름</div>
+                <div className="text-typo-content w-1/5">이름</div>
                 <div className="text-input-text">{userName}</div>
               </div>
-              <div className="flex md:flex-row flex-col py-2 md:gap-3 mb-10">
-                <div className="text-typo-content">전화번호</div>
+              <div className="flex md:flex-row flex-col py-2 md:gap-3 mb-8">
+                <div className="text-typo-content w-1/5">전화번호</div>
                 <div className="text-input-text">{phoneNumber}</div>
               </div>
             </>
           ) : null}
           <div className="flex flex-col py-2 ">
-            <div className="font-bold text-typo-content mb-2">서버 운영 기간</div>
-            <div className="text-input-text mb-14">24.05.22 ~ 24.05.24</div>
+            <div className="flex gap-2 items-center">
+              <MdAccessTimeFilled size={20} className="mb-2" />
+              <div className="font-bold text-typo-content pb-1  text-lg">서버 운영 기간</div>
+            </div>
+            <div className="text-input-text mb-10">24.05.22 ~ 24.05.24</div>
+
+            <div className="font-bold text-typo-content mb-2 text-lg">@ Team blossom</div>
+            <div className="flex md:flex-row flex-col py-2 md:gap-3">
+              <div className="text-typo-content w-1/5">문의</div>
+              <a href="mailto:team.blossom.devs@gmail.com" target="_blank" className="text-input-text">
+                team.blossom.devs@gmail.com
+              </a>
+            </div>
+            <div className="flex md:flex-row flex-col py-2 md:gap-3">
+              <div className="text-typo-content w-1/5">Backend</div>
+              <div className="text-input-text">박제영 이건 이재은 임현정</div>
+            </div>
+            <div className="flex md:flex-row flex-col py-2 md:gap-3 mb-8">
+              <div className="text-typo-content w-1/5">Frontend</div>
+              <div className="text-input-text mb-4">김혜연 이강혁</div>
+            </div>
           </div>
           <Button children="로그아웃" color={'pink'} onClick={logoutButton} />
         </div>
